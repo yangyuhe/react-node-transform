@@ -1,0 +1,14 @@
+{
+  "name": "@yangyuhe/react-node-transform",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {}
+}
