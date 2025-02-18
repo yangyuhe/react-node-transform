@@ -1,5 +1,5 @@
 import React from "react";
 
-export function SimpleComponent() {
+export default function SimpleComponent() {
   return <div>SimpleComponent</div>;
 }
