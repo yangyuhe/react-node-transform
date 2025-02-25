@@ -5,14 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "i18n test",
+            "name": "core test",
             "type": "node",
             "request": "launch",
-            "cwd": "${workspaceRoot}/packages/i18n",
+            "cwd": "${workspaceRoot}/packages/core",
             "runtimeExecutable": "npm",
             "runtimeArgs": [
-                "test"
-            ]
+                "test",
+                "stop.test.tsx"
+            ],
+            "sourceMaps": false,
         }
     ]
 }

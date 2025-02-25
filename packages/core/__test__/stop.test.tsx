@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import React, { ReactElement } from "react";
 import { TransformClass } from "./transformClass";
 import { ReactNodeTransform, SymbolNext, SymbolStop } from "../dist";
-
 function SimpleComponent() {
   return (
     <div>

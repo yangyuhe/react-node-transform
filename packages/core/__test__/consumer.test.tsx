@@ -26,6 +26,8 @@ test("渲染consumer组件", () => {
     </TransformClass>
   );
 
+  screen.debug();
+
   expect(container.querySelector(":not(.transformed_by_me)")).toBeNull();
 
   const element = screen.getByText(/theme is light/i);

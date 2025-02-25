@@ -101,10 +101,12 @@ function NewTypeFactory(
   if (
     //html元素
     typeof OldType === "string" ||
-    //Context.Provider场景
+    //Context.Provider场景(react17)
     OldType.$$typeof?.toString() === "Symbol(react.provider)" ||
-    //Context.Consumer场景
+    //Context.Consumer场景(react17)  Context.Provider场景(react19)
     OldType.$$typeof?.toString() === "Symbol(react.context)" ||
+    //Context.Consumer(react19)
+    OldType.$$typeof?.toString() === "Symbol(react.consumer)" ||
     //React.Fragment场景
     OldType.toString() === "Symbol(react.fragment)" ||
     //React.StrictMode场景
@@ -211,7 +213,8 @@ function proxy(
           OldType.toString() === "Symbol(react.suspense)" ||
           OldType.toString() === "Symbol(react.fragment)" ||
           OldType.$$typeof?.toString() === "Symbol(react.provider)")) ||
-      OldType.$$typeof?.toString() === "Symbol(react.context)"
+      OldType.$$typeof?.toString() === "Symbol(react.context)" ||
+      OldType.$$typeof?.toString() === "Symbol(react.consumer)"
     ) {
       const newChildren = proxyNode(
         oldProps.children,

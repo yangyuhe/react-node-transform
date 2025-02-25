@@ -70,7 +70,7 @@ export function I18n(props: { children; resource: { [key: string]: string } }) {
           return [child, SymbolStop];
         }
 
-        const node = child as ReactElement;
+        const node = child as ReactElement<any>;
         if (node?.type === "input" && node?.props.placeholder) {
           const enPlaceholder = getEn(node?.props.placeholder);
           if (
@@ -81,7 +81,7 @@ export function I18n(props: { children; resource: { [key: string]: string } }) {
               ...node.props,
               placeholder: enPlaceholder,
             };
-            const newChild = {
+            const newChild: any = {
               props: newProps,
             };
             Object.setPrototypeOf(newChild, node);

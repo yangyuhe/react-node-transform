@@ -13,15 +13,15 @@ export function TransformClass(props: { children; className?: string }) {
   return (
     <ReactNodeTransform
       middleware={(node) => {
-        const ele = node as ReactElement;
+        const ele = node as ReactElement<any>;
         if (typeof ele?.type === "string") {
           const newProps = {
             ...ele.props,
-            className: ele.props.className
+            className: ele.props?.className
               ? className + " " + ele.props.className
               : className,
           };
-          const newNode = {
+          const newNode: any = {
             props: newProps,
           };
           Object.setPrototypeOf(newNode, ele);

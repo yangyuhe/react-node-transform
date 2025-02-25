@@ -27,6 +27,7 @@ test("渲染lazy组件", async () => {
   const simple = await screen.findByText(/SimpleComponent/i);
 
   expect(simple).toBeInTheDocument();
+  expect(container.querySelector(":not(.transformed_by_me)")).toBeNull();
 });
 
 test("测试lazy组件的渲染次数", async () => {
