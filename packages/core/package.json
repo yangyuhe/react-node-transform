@@ -11,6 +11,11 @@
     "test": "yarn test-react17 && yarn test-react18 && yarn test-react19",
     "build": "rm -rf dist && tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yangyuhe/react-node-transform.git",
+    "directory": "packages/core"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -12,6 +12,10 @@
   "workspaces": [
     "packages/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yangyuhe/react-node-transform.git"
+  },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@typescript-eslint/eslint-plugin": "^8.22.0",
