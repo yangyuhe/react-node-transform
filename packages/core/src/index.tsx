@@ -265,14 +265,12 @@ export function ReactNodeTransform(props: {
   children: any;
   middleware?: Middleware;
   Context?: React.Context<any>;
-  contextValue?: any;
 }) {
   const typeCacheRef = useRef(new WeakMap());
   const {
     children,
     middleware = () => undefined,
     Context = defaultContext,
-    contextValue = "",
   } = props;
   const newChildren = proxyNode(
     children,
@@ -280,7 +278,5 @@ export function ReactNodeTransform(props: {
     Context,
     typeCacheRef.current
   );
-  return (
-    <Context.Provider value={contextValue}>{newChildren}</Context.Provider>
-  );
+  return newChildren;
 }

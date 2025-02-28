@@ -8,6 +8,9 @@ export function Page() {
     <I18n
       resource={{
         姓名: "name",
+        "你确定要删除节点{{}}吗？": "are you sure to delete node {{}}?",
+        "节点{{1}}已移除的情况下，是否启用新的节点{{2}}？":
+          "do you want to enable new node {{2}} in the case where node {{1}} has been removed?",
       }}
     >
       <div>
@@ -22,6 +25,10 @@ export function Page() {
         >
           <Name id="c" />
         </I18n>
+        <div id="d">你确定要删除节点node-zxy001吗？</div>
+        <div id="e">
+          节点node-zxy001已移除的情况下，是否启用新的节点node-zxy002？
+        </div>
       </div>
     </I18n>
   );
@@ -39,4 +46,10 @@ test("翻译渲染结果", () => {
   expect(container.querySelector("#a")?.innerHTML).toBe("name");
   expect(container.querySelector("#b")?.innerHTML).toBe("姓名");
   expect(container.querySelector("#c")?.innerHTML).toBe("姓名");
+  expect(container.querySelector("#d")?.innerHTML).toBe(
+    "are you sure to delete node node-zxy001?"
+  );
+  expect(container.querySelector("#e")?.innerHTML).toBe(
+    "do you want to enable new node node-zxy002 in the case where node node-zxy001 has been removed?"
+  );
 });

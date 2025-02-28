@@ -13,7 +13,7 @@ import React, {
 import { ExcludeI18n } from "./exclude";
 export { ExcludeI18n } from "./exclude";
 
-const LanguageContext = React.createContext("zh");
+const LanguageContext = React.createContext(0);
 
 export function I18n(props: { children; resource: { [key: string]: string } }) {
   const { children, resource } = props;
@@ -56,43 +56,44 @@ export function I18n(props: { children; resource: { [key: string]: string } }) {
     }
   }, [resource]);
   return (
-    <ReactNodeTransform
-      Context={LanguageContext}
-      contextValue={hash}
-      middleware={(child) => {
-        if (typeof child === "string") {
-          return [getEn(child), SymbolStop];
-        }
-        if (
-          (child as ReactElement)?.type === ExcludeI18n ||
-          (child as ReactElement)?.type === I18n
-        ) {
-          return [child, SymbolStop];
-        }
-
-        const node = child as ReactElement<any>;
-        if (node?.type === "input" && node?.props.placeholder) {
-          const enPlaceholder = getEn(node?.props.placeholder);
-          if (
-            enPlaceholder !== undefined &&
-            enPlaceholder !== node?.props.placeholder
-          ) {
-            const newProps = {
-              ...node.props,
-              placeholder: enPlaceholder,
-            };
-            const newChild: any = {
-              props: newProps,
-            };
-            Object.setPrototypeOf(newChild, node);
-
-            return [newChild, SymbolNext];
+    <LanguageContext.Provider value={hash}>
+      <ReactNodeTransform
+        Context={LanguageContext}
+        middleware={(child) => {
+          if (typeof child === "string") {
+            return [getEn(child), SymbolStop];
           }
-        }
-        return [child, SymbolNext];
-      }}
-    >
-      {children}
-    </ReactNodeTransform>
+          if (
+            (child as ReactElement)?.type === ExcludeI18n ||
+            (child as ReactElement)?.type === I18n
+          ) {
+            return [child, SymbolStop];
+          }
+
+          const node = child as ReactElement<any>;
+          if (node?.type === "input" && node?.props.placeholder) {
+            const enPlaceholder = getEn(node?.props.placeholder);
+            if (
+              enPlaceholder !== undefined &&
+              enPlaceholder !== node?.props.placeholder
+            ) {
+              const newProps = {
+                ...node.props,
+                placeholder: enPlaceholder,
+              };
+              const newChild: any = {
+                props: newProps,
+              };
+              Object.setPrototypeOf(newChild, node);
+
+              return [newChild, SymbolNext];
+            }
+          }
+          return [child, SymbolNext];
+        }}
+      >
+        {children}
+      </ReactNodeTransform>
+    </LanguageContext.Provider>
   );
 }
