@@ -29,8 +29,15 @@ test("渲染strict组件", () => {
 
 test("测试strict组件的渲染次数", () => {
   const onChildInit = jest.fn();
+  const onChange = jest.fn((x) => x);
   const onChildRender = jest.fn();
-  function ChildComponent() {
+  function ChildComponent(props: { c: number }) {
+    const { c } = props;
+
+    useEffect(() => {
+      onChange(c);
+    }, [c]);
+
     useEffect(() => {
       onChildInit();
     }, []);
@@ -39,11 +46,12 @@ test("测试strict组件的渲染次数", () => {
   }
   function Continer() {
     const [c, setC] = useState(0);
+
     return (
       <>
         <button onClick={() => setC((c) => c + 1)}>add</button>
         <StrictMode>
-          <ChildComponent />
+          <ChildComponent c={c} />
         </StrictMode>
       </>
     );
@@ -54,8 +62,15 @@ test("测试strict组件的渲染次数", () => {
     </TransformClass>
   );
 
-  expect(onChildInit.mock.calls).toHaveLength(1);
-  expect(onChildRender.mock.calls).toHaveLength(2);
+  if (React.version.startsWith("19") || React.version.startsWith("17")) {
+    expect(onChange.mock.calls).toHaveLength(1);
+    expect(onChildInit.mock.calls).toHaveLength(1);
+    expect(onChildRender.mock.calls).toHaveLength(2);
+  } else {
+    expect(onChange.mock.calls).toHaveLength(2);
+    expect(onChildInit.mock.calls).toHaveLength(2);
+    expect(onChildRender.mock.calls).toHaveLength(2);
+  }
 
   fireEvent(
     getByText(container, "add"),
@@ -65,6 +80,13 @@ test("测试strict组件的渲染次数", () => {
     })
   );
 
-  expect(onChildInit.mock.calls).toHaveLength(1);
-  expect(onChildRender.mock.calls).toHaveLength(4);
+  if (React.version.startsWith("19") || React.version.startsWith("17")) {
+    expect(onChange.mock.calls).toHaveLength(2);
+    expect(onChildInit.mock.calls).toHaveLength(1);
+    expect(onChildRender.mock.calls).toHaveLength(4);
+  } else {
+    expect(onChange.mock.calls).toHaveLength(3);
+    expect(onChildInit.mock.calls).toHaveLength(2);
+    expect(onChildRender.mock.calls).toHaveLength(4);
+  }
 });
