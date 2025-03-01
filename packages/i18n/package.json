@@ -1,0 +1,57 @@
+{
+  "name": "@react-node-transform/i18n",
+  "version": "1.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test-react17": "jest --config=jest.react17.config.js",
+    "test-react18": "jest --config=jest.react18.config.js",
+    "test-react19": "jest --config=jest.react19.config.js",
+    "test": "yarn test-react17 && yarn test-react18 && yarn test-react19",
+    "build": "rm -rf dist && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yangyuhe/react-node-transform.git",
+    "directory": "packages/i18n"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
+    "@jest/globals": "^29.7.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@types/jest": "^29.5.14",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "react-test-renderer": "^19.0.0",
+    "react-dom": "*",
+    "react-dom17": "npm:react-dom@^17",
+    "react-dom18": "npm:react-dom@^18",
+    "react-dom19": "npm:react-dom@^19",
+    "@types/react-dom": "*",
+    "@types/react-dom17": "npm:@types/react-dom@^17",
+    "@types/react-dom18": "npm:@types/react-dom@^18",
+    "@types/react-dom19": "npm:@types/react-dom@^19",
+    "react": "*",
+    "react17": "npm:react@^17",
+    "react18": "npm:react@^18",
+    "react19": "npm:react@^19",
+    "@types/react": "*",
+    "@types/react17": "npm:@types/react@^17",
+    "@types/react18": "npm:@types/react@^18",
+    "@types/react19": "npm:@types/react@^19",
+    "@testing-library/react": "12.1.5",
+    "@testing-library/react12": "npm:@testing-library/react@12.1.5",
+    "@testing-library/react16": "npm:@testing-library/react"
+  },
+  "dependencies": {
+    "@react-node-transform/core": "^1.0.0"
+  }
+}
